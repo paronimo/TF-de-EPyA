@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+#define MAX_TAREAS 100
 
 typedef struct {                //Estructura pricipal de crear tarea
     char titulo[20];
@@ -12,7 +13,9 @@ typedef struct {                //Estructura pricipal de crear tarea
     int estadoSeleccionado;
     char estado[20];
 } Tarea;
-                               //Todos los void guardados
+                               //Todos los void guardado
+Tarea listaTareas[MAX_TAREAS];
+int cantidadTareas = 0;
 void crearTarea();
 void pedirTitulo(Tarea *t);
 void pedirDescripcion(Tarea *t);
@@ -24,7 +27,7 @@ int main(){
     int opc;
      do {
         printf("\n--- MENU PRINCIPAL ---\n");
-        printf("1. Modulo de suma\n");
+        printf("1. Buscar Tarea\n");
         printf("2. Ver mis tareas\n");
         printf("3. Crear tarea\n");
         printf("0. Salir\n");
@@ -69,7 +72,9 @@ void crearTarea() {                      //Funcion de CREAR TAREA
     printf("¿Confirmar tarea? SI (1) / NO (2): ");
     scanf("%d", &confirm);
 
-    if (confirm == 1) {
+    if (confirm == 1) {                   // guardo en el array
+        listaTareas[cantidadTareas] = tarea;
+    cantidadTareas++;
         printf("¡Se guardó la tarea exitosamente!\n\n\n");
         system("cls");
     } else {
